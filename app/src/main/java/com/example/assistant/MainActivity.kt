@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnCancel.setOnClickListener {
-            startService(Intent(application, MyService().onDestroy()::class.java))
+            stopService(Intent(application, MyService()::class.java))
         }
     }
 

@@ -6,14 +6,12 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 
 
 class MyService : Service() {
@@ -58,7 +56,6 @@ class MyService : Service() {
             private var initialTouchY = 0f
             private var shouldClick = false
             override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                Log.d("String", "ACTION_DOWN")
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         initialX = params.x
@@ -69,13 +66,14 @@ class MyService : Service() {
                         return true
                     }
                     MotionEvent.ACTION_UP -> {
-                        Log.d("String", "ACTION_UP")
                         if (shouldClick) {
                             Toast.makeText(
                                     applicationContext,
                                     "Клик по тосту случился!",
                                     Toast.LENGTH_LONG
                             ).show()
+                            params.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
+                            windowManager.updateViewLayout(image, params)
                             shouldClick = false
                         }
                         return true
@@ -93,7 +91,7 @@ class MyService : Service() {
                 return false
             }
         })
-        windowManager.addView(image, params);
+        windowManager.addView(image, params)
     }
 
 
@@ -104,7 +102,8 @@ class MyService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //windowManager.removeView(image)
+        windowManager.removeView(image)
+
     }
 
     override fun onBind(intent: Intent?): IBinder? {
