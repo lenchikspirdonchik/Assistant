@@ -77,8 +77,6 @@ class MyService : Service() {
                                     "Pied Piper!",
                                     Toast.LENGTH_LONG
                             ).show()
-                            params.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
-                            windowManager.updateViewLayout(image, params)
                             onClick = false
                         }
                         return true
@@ -98,7 +96,7 @@ class MyService : Service() {
         })
         windowManager.addView(image, params)
     }
-    
+
 
     override fun onDestroy() {
         super.onDestroy()

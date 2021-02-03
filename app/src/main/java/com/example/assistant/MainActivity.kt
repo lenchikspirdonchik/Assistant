@@ -34,7 +34,8 @@ class MainActivity : AppCompatActivity() {
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "Пожалуйста, дайте разрешение приложению!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Пожалуйста, дайте разрешение приложению!", Toast.LENGTH_LONG)
+                    .show()
                 val REQUEST_CODE = 101
                 val myIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
                 myIntent.data = Uri.parse("package:$packageName")
