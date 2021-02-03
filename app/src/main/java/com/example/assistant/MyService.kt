@@ -55,41 +55,41 @@ class MyService : Service() {
 
 
         image.setOnTouchListener(object : View.OnTouchListener {
-            private var initialX = 0
-            private var initialY = 0
-            private var initialTouchX = 0f
-            private var initialTouchY = 0f
-            private var shouldClick = false
+            private var x = 0
+            private var y = 0
+            private var touchX = 0f
+            private var touchY = 0f
+            private var onClick = false
             override fun onTouch(v: View?, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        initialX = params.x
-                        initialY = params.y
-                        initialTouchX = event.rawX
-                        initialTouchY = event.rawY
-                        shouldClick = true
+                        x = params.x
+                        y = params.y
+                        touchX = event.rawX
+                        touchY = event.rawY
+                        onClick = true
                         return true
                     }
                     MotionEvent.ACTION_UP -> {
-                        if (shouldClick) {
+                        if (onClick) {
                             Toast.makeText(
                                     applicationContext,
-                                    "Клик по тосту случился!",
+                                    "Pied Piper!",
                                     Toast.LENGTH_LONG
                             ).show()
                             params.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
                             windowManager.updateViewLayout(image, params)
-                            shouldClick = false
+                            onClick = false
                         }
                         return true
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        params.x = (initialX
-                                + (event.rawX - initialTouchX).toInt())
-                        params.y = (initialY
-                                + (event.rawY - initialTouchY).toInt())
+                        params.x = (x
+                                + (event.rawX - touchX).toInt())
+                        params.y = (y
+                                + (event.rawY - touchY).toInt())
                         windowManager.updateViewLayout(image, params)
-                        shouldClick = false
+                        onClick = false
                         return true
                     }
                 }
@@ -98,12 +98,7 @@ class MyService : Service() {
         })
         windowManager.addView(image, params)
     }
-
-
-    private fun doSomething() {
-        Toast.makeText(baseContext, "did something", Toast.LENGTH_SHORT).show()
-    }
-
+    
 
     override fun onDestroy() {
         super.onDestroy()
