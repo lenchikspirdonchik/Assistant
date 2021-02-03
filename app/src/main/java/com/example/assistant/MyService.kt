@@ -1,5 +1,10 @@
 package com.example.assistant
-
+//
+//  MyService.kt
+//  Assistant
+//
+//  Created by Leonid Spiridonov on 03.02.2021.
+//
 import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Intent

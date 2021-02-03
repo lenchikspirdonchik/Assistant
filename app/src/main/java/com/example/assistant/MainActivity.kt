@@ -1,5 +1,10 @@
 package com.example.assistant
-
+//
+//  MainActivity.kt
+//  Assistant
+//
+//  Created by Leonid Spiridonov on 03.02.2021.
+//
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
